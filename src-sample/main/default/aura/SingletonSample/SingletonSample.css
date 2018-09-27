@@ -1,0 +1,15 @@
+.THIS .slds-box {
+    padding:0;
+    min-width: 3rem;
+    min-height: 3rem;
+}
+
+.THIS .slds-box:empty {
+    background-color: #f3f2f2;
+}
+
+.THIS .slds-box .slds-theme_success {
+    min-height: 3rem;
+    line-height: 1.5rem;
+    border-radius: .25rem;
+}

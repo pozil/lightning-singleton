@@ -1,0 +1,15 @@
+<aura:component>
+    <aura:attribute access="public" name="name" type="String" required="true" description="Singleton name"/>
+    <aura:attribute access="private" name="isActive" type="Boolean" description="Whether this instance is active" default=""/>
+    <aura:attribute access="private" name="instanceId" type="Decimal" description="Instance id"/>
+    <aura:attribute access="private" name="syncTime" type="Long" description="Timestamp at which sync was completed"/>
+    <aura:attribute access="private" name="otherInstances" type="Map[]" description="All sync events" default="[]"/>
+
+    <aura:handler event="c:SingletonSyncEvent" action="{!c.onSyncEvent}" includeFacets="true"/>
+    <aura:registerEvent name="syncEvent" type="c:SingletonSyncEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <aura:if isTrue="{!v.isActive}">
+        {!v.body}
+    </aura:if>
+</aura:component>

@@ -1,0 +1,66 @@
+<aura:documentation>
+	<aura:description>
+		<p>The Singleton component enforces a singleton pattern: there can only be one active instance with a given name in a Lightning page context.<br/>
+		This is useful when using libraries that must be loaded only once per page and when we have no control over the rest of the page.</p>
+		
+		<p>The singeton uses a built-in synchronization mechanism based on application events and unique hashes in order to ensure that there is only one active instance per unique name.</p>
+		
+		<p>Note that Singleton acts as a wrapper component so it has no user interface of its own.</p>
+		
+		<p>Singleton guarantees the following:
+			<ul>
+				<li>only one randomly selected instance is activated and loads its encapsulated content.</li>
+				<li>all existing other instances are deactivated without loading their encapsulated content.</li>
+				<li>if other instances are added later in the same page, they will be instantly deactivated.</li>
+			</ul>
+		</p>
+
+		<h4>Example 1</h4>
+		<p>Use the singleton by giving it a unique name and embedding some content in it:</p>
+
+<pre>&lt;c:Singleton name="mySingleton"&gt;
+
+  &lt;!-- Insert your unique content here... --&gt;
+
+  &lt;!-- ... it can be basic HTML --&gt;
+  &lt;p&gt;Anything placed in here is garanteed to be instanciated only once in the context of a Lightning page.&lt;/p&gt;
+
+  &lt;!-- ... or a third party JS library --&gt;
+  &lt;ltng:require scripts="{!$Resource.jsLibraries + '/jsLibOne.js'}" afterScriptsLoaded="{!c.scriptsLoaded}"/&gt;
+
+  &lt;!-- ... or a lightning component --&gt;
+  &lt;c:someComponent/&gt;
+
+&lt;/c:Singleton&gt;</pre>
+
+		<p>If you create a page that contains 100 times the above code:</p>
+		<ul>
+			<li>the embedded paragraph will only appear once</li>
+			<li>the <code>jsLibOne.js</code> library will only be loaded once and the <code>c.scriptsLoaded</code> function will be called only once</li>
+			<li><code>c:someComponent</code> will only be loaded once and its <code>init</code> handler will only be triggered once</li>
+		</ul>
+
+
+		<h4>Example 2</h4>
+		<p>If a page contains the following code:</p>
+<pre>&lt;c:Singleton name="singletonA"&gt;
+  &lt;c:componentA/&gt;
+&lt;/c:Singleton&gt;
+&lt;c:Singleton name="singletonA"&gt;
+  &lt;c:componentA/&gt;
+&lt;/c:Singleton&gt;
+
+&lt;c:Singleton name="singletonB"&gt;
+  &lt;c:componentB/&gt;
+&lt;/c:Singleton&gt;
+&lt;c:Singleton name="singletonB"&gt;
+  &lt;c:componentB/&gt;
+&lt;/c:Singleton&gt;
+
+&lt;c:Singleton name="singletonC"&gt;
+  &lt;c:componentB/&gt;
+&lt;/c:Singleton&gt;</pre>
+		<p>The page will contain one instance of <code>c:componentA</code>, <code>c:componentB</code> and <code>c:componentC</code>.
+		</p>
+	</aura:description>
+</aura:documentation>

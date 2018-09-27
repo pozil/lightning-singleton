@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Singleton synchronization event">
+    <aura:attribute name="name" type="String" required="true" description="Singleton name"/>
+    <aura:attribute name="instanceId" type="Decimal" required="true" description="Instance id"/>
+    <aura:attribute name="isActive" type="Boolean" description="Whether this instance is active"/>
+</aura:event>

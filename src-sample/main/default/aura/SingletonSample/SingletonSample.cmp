@@ -1,0 +1,56 @@
+<aura:component>
+    <aura:attribute access="private" name="name" type="String" default="mySingleton"/>
+
+    <div class="slds-form slds-form_stacked">
+        <lightning:input name="name" label="Singleton unique name" value="{!v.name}" required="true"/>
+    </div>
+    <div class="slds-align_absolute-center slds-m-bottom_large">
+        <lightning:button variant="brand" label="Add 1 component" onclick="{!c.onAddOneInstance}" disabled="{!empty(v.name)}"/>
+        <lightning:button variant="brand" label="Add 5 components" onclick="{!c.onAddFiveInstances}" disabled="{!empty(v.name)}"/>
+    </div>
+    
+    <div class="slds-text-heading_medium">Component instances:</div>
+    <div class="slds-media slds-m-vertical_small">
+        <div class="slds-media__figure">
+            <lightning:icon iconName="utility:info" size="normal" alternativeText="Info icon"/>
+        </div>
+        <div class="slds-media__body">
+            <p>Each box below represent a component that contains a singleton instance.<br/>
+            Grey boxes contain disabled singleton instances and green boxes contain active singletons.<br/>
+            There can only be one active singleton instance per unique name.</p>
+        </div>
+    </div>
+    
+
+    <lightning:layout aura:id="container" pullToBoundary="small" multipleRows="true">
+        <lightning:layoutItem class="slds-box slds-m-around_small">
+            <c:Singleton name="mySingleton">
+                <div class="slds-theme_success slds-p-around_small">mySingleton is active</div>
+            </c:Singleton>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem class="slds-box slds-m-around_small">
+            <c:Singleton name="mySingleton">
+                <div class="slds-theme_success slds-p-around_small">mySingleton is active</div>
+            </c:Singleton>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem class="slds-box slds-m-around_small">
+            <c:Singleton name="mySingleton">
+                <div class="slds-theme_success slds-p-around_small">mySingleton is active</div>
+            </c:Singleton>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem class="slds-box slds-m-around_small">
+            <c:Singleton name="mySingleton">
+                <div class="slds-theme_success slds-p-around_small">mySingleton is active</div>
+            </c:Singleton>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem class="slds-box slds-m-around_small">
+            <c:Singleton name="mySingleton">
+                <div class="slds-theme_success slds-p-around_small">mySingleton is active</div>
+            </c:Singleton>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>	
