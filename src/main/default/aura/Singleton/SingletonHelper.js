@@ -5,13 +5,15 @@
         // Save sync time
         component.set('v.syncTime', new Date().getTime());
         // Abort if we already have an active instance
-        const activeIndex = otherInstances.indexOf(syncEvent => syncEvent.isActive);
+        const activeIndex = otherInstances.indexOf(function(syncEvent) {
+            return syncEvent.isActive;
+        });
         if (activeIndex !== -1 || otherInstances.length === 0) {
             return;
         }
         // Figure out minimum instanceId
         let minInstanceId = otherInstances[0].instanceId;
-        otherInstances.forEach(syncEvent => {
+        otherInstances.forEach(function(syncEvent) {
             if (syncEvent.instanceId < minInstanceId) {
                 minInstanceId = syncEvent.instanceId;
             }

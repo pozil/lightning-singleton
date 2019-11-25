@@ -12,7 +12,7 @@
                     HTMLAttributes: {class: 'slds-theme_success slds-p-around_small'}
                 }]
             ],
-            (components, status, errorMessage) => {
+            function(components, status, errorMessage) {
                 if (status === 'SUCCESS') {
                     const layoutItem = components[0];
                     const singleton = components[1];
