@@ -41,7 +41,6 @@ Use the singleton by giving it a unique name and embedding some content in it.
 ### Example 2: Dynamic child component
 1. Configure child component in controller or helper
 ```js
-// 
 const singletonChild = {
     type: 'lightning:icon',
     attributes: {
