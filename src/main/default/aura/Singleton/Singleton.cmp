@@ -1,5 +1,7 @@
 <aura:component>
     <aura:attribute access="public" name="name" type="String" required="true" description="Singleton name"/>
+    <aura:attribute access="public" name="childComponent" type="Map" description="Child component configuration as {type: '', attributes: {}}"/>
+
     <aura:attribute access="private" name="isActive" type="Boolean" description="Whether this instance is active" default=""/>
     <aura:attribute access="private" name="instanceId" type="Decimal" description="Instance id"/>
     <aura:attribute access="private" name="syncTime" type="Long" description="Timestamp at which sync was completed"/>

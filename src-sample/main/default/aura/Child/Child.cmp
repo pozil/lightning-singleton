@@ -1,0 +1,7 @@
+<aura:component>
+    <aura:attribute access="public" name="name" type="String" required="true"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <div class="slds-theme_success slds-p-around_small">{!v.name} is active</div>
+</aura:component>

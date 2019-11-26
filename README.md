@@ -13,6 +13,7 @@ Singleton guarantees the following:
 - only one randomly selected instance is activated and loads its encapsulated content.
 - all existing other instances are deactivated without loading their encapsulated content.
 - if other instances are added later in the same page, they will be instantly deactivated.
+- the `init` function of the singleton's child components will only be called once
 
 
 ## Installation
@@ -26,60 +27,37 @@ Deploy the component and the sample application with Salesforce DX by clicking o
 The component is documented using Aura documentation. Access it from this URL (replace the domain):<br/>
 https://<b>&lt;YOUR_DOMAIN&gt;</b>.lightning.force.com/docs/component-library/bundle/c:Singleton
 
-### Example 1
+### Example 1: Static child component
 
-Use the singleton by giving it a unique name and embedding some content in it:
+Use the singleton by giving it a unique name and embedding some content in it.
+
 ```xml
-<c:Singleton name="mySingleton">
-
-    <!-- Insert your unique content here... -->
-
-    <!-- ... it can be basic HTML -->
-    <p>Anything placed in here is garanteed to be instanciated only once in the context of a Lightning page.</p>
-
-    <!-- ... or a third party JS library -->
-    <ltng:require scripts="{!$Resource.jsLibraries + '/jsLibOne.js'}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
-
-    <!-- ... or a lightning component -->
-    <c:someComponent/>
-
+<c:Singleton
+    name="mySingleton"
+    childComponent="{type: 'c:Child', attributes: { label: 'some label' }}">
 </c:Singleton>
 ```
 
-If you create a page that contains 100 times the above code:
-
-- the embedded paragraph will only appear once
-- the `jsLibOne.js` library will only be loaded once and the `c.scriptsLoaded` function will be called only once
-- `c:someComponent` will only be loaded once and its `init` handler will only be triggered once
-
-This holds true even if other instances are dynamically added to the page later.
-
-### Example 2
-
-If a page contains the following code:
-
+### Example 2: Dynamic child component
+1. Configure child component in controller or helper
+```js
+// 
+const singletonChild = {
+    type: 'lightning:icon',
+    attributes: {
+        iconName: 'action:approval',
+        alternativeText: 'Approved'
+    }
+};
+component.set('v.singletonChild', singletonChild);
+```
+2. Use the singleton with the child component configuration:
 ```xml
-<c:Singleton name="singletonA">
-	<c:componentA/>
-</c:Singleton>
-<c:Singleton name="singletonA">
-	<c:componentA/>
-</c:Singleton>
-
-<c:Singleton name="singletonB">
-	<c:componentB/>
-</c:Singleton>
-<c:Singleton name="singletonB">
-	<c:componentB/>
-</c:Singleton>
-
-<c:Singleton name="singletonC">
-	<c:componentB/>
+<c:Singleton
+    name="myOtherSingleton"
+    childComponent="{!v.singletonChild}">
 </c:Singleton>
 ```
-
-The page will contain one instance of `c:componentA`, `c:componentB` and `c:componentC`.
-
 
 ## Sample application
 The default installation includes the Singleton component and a sample application available under this URL (replace the domain):<br/>

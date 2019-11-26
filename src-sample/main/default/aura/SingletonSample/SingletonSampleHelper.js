@@ -2,23 +2,25 @@
     injectSingleton : function(component) {
         const newName = component.get('v.name');
         console.log('Adding singleton with name='+ newName);
+        const singletonChild = {
+            type: 'c:Child',
+            attributes: {
+                name: newName
+            }
+        };
         $A.createComponents(
             [
                 ['lightning:layoutItem', {class: 'slds-box slds-m-around_small'}],
-                ['c:Singleton', {name: newName}],
-                ['aura:html', {
-                    tag: 'div',
-                    body: newName + ' is active',
-                    HTMLAttributes: {class: 'slds-theme_success slds-p-around_small'}
+                ['c:Singleton', {
+                    name: newName,
+                    childComponent: singletonChild
                 }]
             ],
             function(components, status, errorMessage) {
                 if (status === 'SUCCESS') {
                     const layoutItem = components[0];
                     const singleton = components[1];
-                    const div = components[2];
                     
-                    singleton.set('v.body', div);
                     layoutItem.set('v.body', singleton);
 
                     const container = component.find('container');
