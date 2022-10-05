@@ -18,10 +18,7 @@ Singleton guarantees the following:
 
 ## Installation
 
-Deploy the component and the sample application with Salesforce DX by clicking on this button:
-
-[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com)
-
+Deploy the component and the sample application with the Salesforce CLI.
 
 ## Documentation
 The component is documented using Aura documentation. Access it from this URL (replace the domain):<br/>
